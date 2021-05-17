@@ -6,6 +6,7 @@ import time
 from urllib.parse import urljoin
 
 from .http_request_retry import retry_session
+from .constants import STATUS_SUCCEEDED, STATUS_FAILED
 
 
 class CommonClient:

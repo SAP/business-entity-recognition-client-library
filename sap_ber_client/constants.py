@@ -35,6 +35,9 @@ DEPLOYMENT_BY_ID_ENDPOINT = partial('deployments/{deployment_id}'.format)       
 INFERENCE_JOBS_ENDPOINT = 'inference/jobs'                                                           # post
 INFERENCE_JOB_BY_ID_ENDPOINT = partial('inference/jobs/{jobId}'.format)                                    # get
 
+STATUS_SUCCEEDED = 'SUCCEEDED'
+STATUS_FAILED = 'FAILED'
+
 # API_PAGINATION_TOP_PARAM = 'top'
 # API_PAGINATION_SKIP_PARAM = 'skip'
 # API_PAGINATION_COUNT_PARAM = 'count'
