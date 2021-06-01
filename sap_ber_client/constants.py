@@ -33,7 +33,9 @@ DEPLOYMENT_BY_ID_ENDPOINT = partial('deployments/{deployment_id}'.format)       
 
 # inference
 INFERENCE_JOBS_ENDPOINT = 'inference/jobs'                                                           # post
-INFERENCE_JOB_BY_ID_ENDPOINT = partial('inference/jobs/{jobId}'.format)                                    # get
+INFERENCE_JOB_BY_ID_ENDPOINT = partial('inference/jobs/{job_id}'.format)
+BATCH_INFERENCE_JOB_BY_ID_ENDPOINT = partial('inference/jobs/{job_id}/document'.format)
+# get
 
 STATUS_SUCCEEDED = 'SUCCEEDED'
 STATUS_FAILED = 'FAILED'

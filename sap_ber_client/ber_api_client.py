@@ -3,7 +3,8 @@ import logging
 from .constants import DATASETS_ENDPOINT, DATASET_BY_ID_ENDPOINT, \
     DATASET_DOCUMENTS_ENDPOINT, DATASET_DOCUMENT_BY_ID_ENDPOINT, TRAINING_JOBS_ENDPOINT, TRAINING_JOB_BY_ID_ENDPOINT, \
     MODELS_ENDPOINT, MODEL_BY_NAME_ENDPOINT, MODEL_BY_VERSION_ENDPOINT, \
-    DEPLOYMENTS_ENDPOINT, DEPLOYMENT_BY_ID_ENDPOINT, INFERENCE_JOBS_ENDPOINT, INFERENCE_JOB_BY_ID_ENDPOINT
+    DEPLOYMENTS_ENDPOINT, DEPLOYMENT_BY_ID_ENDPOINT, INFERENCE_JOBS_ENDPOINT, INFERENCE_JOB_BY_ID_ENDPOINT, \
+    BATCH_INFERENCE_JOB_BY_ID_ENDPOINT
 from .http_client_base import CommonClient
 
 
@@ -51,13 +52,14 @@ class BER_API_Client(CommonClient):
         return response
 
     # Dataset
-    def create_dataset(self):
+    def create_dataset(self, dataset_type="training"):
         """
         Creates an empty dataset
         :return: Object containing the dataset id
         """
         self.logger.debug('Creating a new dataset')
-        response = self.session.post(self.path_to_url(DATASETS_ENDPOINT))
+        response = self.session.post(self.path_to_url(DATASETS_ENDPOINT),
+                                     json={"datasetType": dataset_type})
         response.raise_for_status()
         self.logger.info('Successfully created a new dataset')
         return response
@@ -188,6 +190,16 @@ class BER_API_Client(CommonClient):
         response.raise_for_status()
         return response
 
+    def get_recently_submitted_training_jobs_list(self):
+        """
+        Fetches the list of recently submitted training jobs (~12 Hour interval)
+        :return: Object containing the list of training jobs
+        """
+        self.logger.debug('getting list of recently submitted training jobs')
+        response = self.session.get(self.path_to_url(TRAINING_JOBS_ENDPOINT))
+        response.raise_for_status()
+        return response
+
     # Models
     def get_trained_models(self):
         """
@@ -304,8 +316,8 @@ class BER_API_Client(CommonClient):
         """
         Triggers inference job
         :param text: The name of the new model to train
-        :param model_name: The name of existing dataset
-        :param model_version: The version of existing dataset
+        :param model_name: The name of existing model
+        :param model_version: The version of existing model
         :return: Object containing the job details
         """
         self.logger.debug('Submitting inference job')
@@ -323,8 +335,37 @@ class BER_API_Client(CommonClient):
         :param job_id: Inference Job ID
         :return: Object containing the predicted result
         """
-        self.logger.debug('Getting information about all trained models')
+        self.logger.debug('Getting inference job information')
         response = self.session.get(self.path_to_url(INFERENCE_JOB_BY_ID_ENDPOINT(job_id=job_id)))
         response.raise_for_status()
         self.logger.info('Received inference job details successfully')
+        return response
+
+    def post_batch_inference_job(self, dataset_id, model_name, model_version):
+        """
+        Triggers batch inference job
+        :param dataset_id: Id of the inference dataset
+        :param model_name: The name of existing model
+        :param model_version: The version of existing model
+        :return:
+        """
+        self.logger.debug('Submitting batch inference job')
+        response = self.session.post(self.path_to_url(INFERENCE_JOBS_ENDPOINT),
+                                     json={"datasetId": dataset_id,
+                                           "modelName": model_name,
+                                           "modelVersion": model_version})
+        response.raise_for_status()
+        self.logger.info('Submitted batch inference job successfully')
+        return response
+
+    def get_batch_inference_job_result(self, job_id):
+        """
+        Gets results of batch inference job
+        :param job_id: Inference Job ID
+        :return: Object containing the predicted result
+        """
+        self.logger.debug('Getting inference job information')
+        response = self.session.get(self.path_to_url(BATCH_INFERENCE_JOB_BY_ID_ENDPOINT(job_id=job_id)))
+        response.raise_for_status()
+        self.logger.info('Received batch inference job details successfully')
         return response
