@@ -52,13 +52,14 @@ class BER_API_Client(CommonClient):
         return response
 
     # Dataset
-    def create_dataset(self):
+    def create_dataset(self, dataset_type="training"):
         """
         Creates an empty dataset
         :return: Object containing the dataset id
         """
         self.logger.debug('Creating a new dataset')
-        response = self.session.post(self.path_to_url(DATASETS_ENDPOINT))
+        response = self.session.post(self.path_to_url(DATASETS_ENDPOINT),
+                                     json={"datasetType": dataset_type})
         response.raise_for_status()
         self.logger.info('Successfully created a new dataset')
         return response
