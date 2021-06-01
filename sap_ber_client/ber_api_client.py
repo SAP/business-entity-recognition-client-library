@@ -358,7 +358,7 @@ class BER_API_Client(CommonClient):
         self.logger.info('Submitted batch inference job successfully')
         return response
 
-    def get_batch_inference_job(self, job_id):
+    def get_batch_inference_job_result(self, job_id):
         """
         Gets results of batch inference job
         :param job_id: Inference Job ID
