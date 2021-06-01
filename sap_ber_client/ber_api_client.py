@@ -349,13 +349,13 @@ class BER_API_Client(CommonClient):
         :param model_version: The version of existing model
         :return:
         """
-        self.logger.debug('Submitting inference job')
+        self.logger.debug('Submitting batch inference job')
         response = self.session.post(self.path_to_url(INFERENCE_JOBS_ENDPOINT),
                                      json={"datasetId": dataset_id,
                                            "modelName": model_name,
                                            "modelVersion": model_version})
         response.raise_for_status()
-        self.logger.info('Submitted inference job successfully')
+        self.logger.info('Submitted batch inference job successfully')
         return response
 
     def get_batch_inference_job(self, job_id):
