@@ -221,7 +221,6 @@ class BER_API_Client(CommonClient):
         :return: Object containing all versions of the model with the training status and training accuracy data
         """
         self.logger.debug('Getting information about the model {}'.format(model_name))
-        # , model_version))
         response = self.session.get(self.path_to_url(MODEL_BY_NAME_ENDPOINT(model_name=model_name)))
         response.raise_for_status()
         self.logger.info('Successfully got the information about the model {}'.format(
@@ -309,6 +308,17 @@ class BER_API_Client(CommonClient):
         self.logger.info('Successfully triggered the removal of the model deployment with ID {}, waiting for '
                          'the deployment completion'.format(deployment_id))
 
+        return response
+
+    def get_deployments(self):
+        """
+        See information about all deployed models.
+        :return: Object containing information about the deployed models
+        """
+        self.logger.debug('Triggering the get deployments')
+        response = self.session.get(self.path_to_url(DEPLOYMENTS_ENDPOINT))
+        response.raise_for_status()
+        self.logger.info('Successfully received the deployment details')
         return response
 
     # Inference
