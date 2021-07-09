@@ -26,6 +26,6 @@ Please see the issues section.
 In case you would like to contribute to this project, ask any questions or get support, please open an issue containing the description of your question or planned contribution in GitHub and we will get in touch.
 
 ## License
-Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved. This file is licensed under the Apache License, v 2.0 except as noted otherwise in the LICENSE.txt file.
+Copyright (c) 2021 SAP SE or an SAP affiliate company. All rights reserved. This file is licensed under the Apache License, v 2.0 except as noted otherwise in the LICENSE file.
 
 
