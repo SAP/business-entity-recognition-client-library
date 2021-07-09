@@ -6,11 +6,10 @@ https://github.com/pypa/sampleproject
 """
 
 # Always prefer setuptools over distutils
-from codecs import open
 from setuptools import setup, find_packages
 
-setup(name='business-entity-recognition-client-library',
-      version=1.5,
+setup(name='sap-business-entity-recognition-client-library',
+      version=1.1,
       license='apache-2.0',
       install_requires=[
           'requests==2.25.1'

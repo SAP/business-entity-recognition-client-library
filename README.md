@@ -11,7 +11,7 @@ This library requires properly setup Python 3 environment.
 ## Download and Installation
 This Python library should be consumed in the standard way by running
 
-pip install sap-...
+pip install sap-business-entity-recognition-client-library
 
 or adding the library as a dependency of your code in requirements.txt file.
 
