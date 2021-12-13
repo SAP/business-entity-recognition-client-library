@@ -255,7 +255,7 @@ class BER_API_Client(CommonClient):
             self.path_to_url(MODEL_BY_VERSION_ENDPOINT(model_name=model_name, model_version=model_version)))
         response.raise_for_status()
         self.logger.info('Successfully deleted the model {} with version {}'.format(model_name, model_version))
-        return response.json()
+        return response
 
     # Deployment
     def deploy_model(self, model_name, model_version):
