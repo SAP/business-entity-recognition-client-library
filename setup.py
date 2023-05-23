@@ -12,7 +12,7 @@ setup(name='sap-business-entity-recognition-client-library',
       version=1.2,
       license='apache-2.0',
       install_requires=[
-          'requests==2.26.0'
+          'requests==2.31.0'
       ],
       packages=find_packages(
           exclude=['examples*']),
