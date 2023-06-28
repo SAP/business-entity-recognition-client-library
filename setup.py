@@ -9,7 +9,7 @@ https://github.com/pypa/sampleproject
 from setuptools import setup, find_packages
 
 setup(name='sap-business-entity-recognition-client-library',
-      version=1.3,
+      version=1.4,
       license='apache-2.0',
       install_requires=[
           'requests~=2.31'

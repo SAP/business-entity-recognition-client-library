@@ -113,8 +113,9 @@ class BER_API_Client(CommonClient):
 
         self.logger.debug('Uploading the document {} to the dataset {}'.format(
             document_path, dataset_id))
+        document_name = document_path.split("/")[-1]
         response = self.session.post(self.path_to_url(DATASET_DOCUMENTS_ENDPOINT(dataset_id=dataset_id)),
-                                     files={'document': open(document_path, 'rb')})
+                                     files={'document': (document_name, open(document_path, 'rb'), "application/json")})
         response.raise_for_status()
         self.logger.debug('Successfully uploaded the document {} to the dataset {}, waiting for '
                           'the document processing'.format(document_path, dataset_id))
